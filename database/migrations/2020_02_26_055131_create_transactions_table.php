@@ -17,10 +17,10 @@ class CreateTransactionsTable extends Migration
             // Fields
             $table->bigIncrements('id');
             $table->string('account_number');
-            $table->enum('type', ['AcceptEnrollment', 'RejectEnrollment', 'RejectChange'])->default('AcceptEnrollment');
+            $table->enum('type', ['Accept Enrollment', 'Reject Enrollment', 'Reject Change'])->default('Accept Enrollment');
             $table->bigInteger('original_transaction_id');
             $table->dateTime('sent_at');
-            $table->dateTime('processed_at');
+            $table->dateTime('processed_at')->nullable()->default(null);
 
             // Timestamps
             $table->timestamps();

@@ -10,17 +10,24 @@ class Transaction extends Model
 
     protected $table = 'transactions';
 
+    protected $fillable = [
+        'account_number',
+        'type',
+        'original_transaction_id',
+        'sent_at'
+    ];
+
     /******************************************************************************
      *
      * Relationships
      *
      ******************************************************************************/
 
-    public function pendingOutbounds() {
-        return $this->hasMany('App\XTChallenge\Models\MySQL\PendingOutbound', 'transaction_id');
+    public function pendingOutbound() {
+        return $this->hasOne('App\XTChallenge\Models\MySQL\PendingOutbound', 'transaction_id');
     }
 
-    public function errorTransactions() {
-        return $this->hasMany('App\XTChallenge\Models\MySQL\ErrorTransaction', 'transaction_id');
+    public function errorTransaction() {
+        return $this->hasOne('App\XTChallenge\Models\MySQL\ErrorTransaction', 'transaction_id');
     }
 }

@@ -10,6 +10,10 @@ class PendingOutbound extends Model
 
     protected $table = 'pending_outbound';
 
+    protected $fillable = [
+        'type'
+    ];
+
     /******************************************************************************
      *
      * Relationships

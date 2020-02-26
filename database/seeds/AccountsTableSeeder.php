@@ -1,6 +1,6 @@
 <?php
 
-use App\Account;
+use App\XTChallenge\Models\MySQL\Account;
 use Illuminate\Database\Seeder;
 
 class AccountsTableSeeder extends Seeder

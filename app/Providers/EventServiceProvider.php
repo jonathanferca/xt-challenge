@@ -18,6 +18,15 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\AcceptEnrollmentTransactionProcessed' => [
+            'App\Listeners\AcceptEnrollmentTransactionProcessedListener'
+        ],
+        'App\Events\RejectEnrollmentTransactionProcessed' => [
+            'App\Listeners\RejectEnrollmentTransactionProcessedListener'
+        ],
+        'App\Events\RejectChangeTransactionProcessed' => [
+            'App\Listeners\RejectChangeTransactionProcessedListener'
+        ],
     ];
 
     /**

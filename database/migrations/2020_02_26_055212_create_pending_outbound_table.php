@@ -16,7 +16,7 @@ class CreatePendingOutboundTable extends Migration
         Schema::create('pending_outbound', function (Blueprint $table) {
             // Fields
             $table->bigIncrements('id');
-            $table->enum('type', ['RequestHistoricalUsage'])->default('RequestHistoricalUsage');
+            $table->enum('type', ['Request Historical Usage'])->default('Request Historical Usage');
 
             // Foreign Keys
             $table->unsignedBigInteger('transaction_id');
