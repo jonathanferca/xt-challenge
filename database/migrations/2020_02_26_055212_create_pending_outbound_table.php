@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreatePendingOutboundTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('pending_outbound', function (Blueprint $table) {
             // Fields
             $table->bigIncrements('id');
-            $table->string('account_number');
-            $table->dateTime('enrolled_at')->nullable();
+            $table->enum('type', ['Request Historical Usage'])->default('Request Historical Usage');
+
+            // Foreign Keys
+            $table->unsignedBigInteger('transaction_id');
+
+            // Foreign Keys Constraints
+            $table->foreign('transaction_id')->references('id')->on('transactions');
 
             // Timestamps
             $table->timestamps();
@@ -31,6 +36,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('pending_outbound');
     }
 }
