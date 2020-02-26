@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             // Fields
             $table->bigIncrements('id');
             $table->string('account_number');
-            $table->dateTime('enrolled_at')->nullable();
+            $table->enum('type', ['AcceptEnrollment', 'RejectEnrollment', 'RejectChange'])->default('AcceptEnrollment');
+            $table->bigInteger('original_transaction_id');
+            $table->dateTime('sent_at');
+            $table->dateTime('processed_at');
 
             // Timestamps
             $table->timestamps();
@@ -31,6 +34,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('transactions');
     }
 }

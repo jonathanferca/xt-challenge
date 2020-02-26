@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFailedJobsTable extends Migration
+class CreateErrorTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateFailedJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
+        Schema::create('error_transactions', function (Blueprint $table) {
             // Fields
             $table->bigIncrements('id');
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
+
+            // Foreign Keys
+            $table->unsignedBigInteger('transaction_id');
+
+            // Foreign Keys Constraints
+            $table->foreign('transaction_id')->references('id')->on('transactions');
 
             // Timestamps
-            $table->timestamp('failed_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +35,6 @@ class CreateFailedJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('error_transactions');
     }
 }
