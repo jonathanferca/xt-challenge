@@ -101,7 +101,7 @@ dd($csvContent);
 
         php artisan transactions:process
 
-3. When every different transaction type is processed an event for that specific type is emitted so it'll be easy to hook into that moment and do the actions plan for the future.
+3. When every different transaction type is processed an event for that specific type is emitted so it'll be easy to hook into that moment and do the actions planned for the future.
 
 ### Bonus Features
 1. A task is configured in '/app/Console/Kernel.php' to run the transactions:process command every day at 06:00.
