@@ -88,3 +88,33 @@ dd($csvContent);
 ## Delivery
 * You can create a git repo and send the link or you can email us a zip file.
 * There is no preference in delivery, it's whatever is convenient for you.
+
+
+## Developer Notes
+
+### Main Features
+1. Transactions import runs in the following command:
+
+        php artisan transactions:import
+
+2. Transactions process runs in the following command:
+
+        php artisan transactions:process
+
+3. When every different transaction type is processed an event for that specific type is emitted so it'll be easy to hook into that moment and do the actions plan for the future.
+
+### Bonus Features
+1. A task is configured in '/app/Console/Kernel.php' to run the transactions:process command every day at 06:00.
+
+2. An end point was created to receive a JSON request and create a new transaction under the following URI:
+
+        HTTP Method: POST
+        
+        HTTP URI: /api/transaction
+
+        Headers: 
+
+            - Accept: application/json
+            - Content-Type: application/json
+
+        
